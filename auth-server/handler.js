@@ -20,10 +20,7 @@ const credentials = {
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   redirect_uris: ["https://norihess.github.io/meetup"],
-  javascript_origins: ["https://norihess.github.io", "http://localhost:3000"],
-  headers: {
-    'Access-Control-Allow-Origin': '*'
-  },
+  javascript_origins: ["https://norihess.github.io", "http://localhost:3000"]
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 const oAuth2Client = new google.auth.OAuth2(

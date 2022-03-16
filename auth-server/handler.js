@@ -37,13 +37,6 @@ const oAuth2Client = new google.auth.OAuth2(
  *
  */
 module.exports.getAuthURL = async () => {
-  /**
-   *
-   * Scopes array passed to the `scope` option. Any scopes passed must be enabled in the
-   * "OAuth consent screen" settings in your project on your Google Console. Also, any passed
-   *  scopes are the ones users will see when the consent screen is displayed to them.
-   *
-   */
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: SCOPES,
@@ -59,3 +52,85 @@ module.exports.getAuthURL = async () => {
     }),
   };
 };
+module.exports.getAccessToken = event => {
+  const oAuth2Client = new google.auth.oAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+  const code = decodeURIComponent(`${event.pathParameters.code}`);
+  return new Promise ((resolve, reject) => {
+    oAuth2Client.getToken(code, (err, token) => {
+      if (err){
+        return reject (err);
+      }
+      return resolve (token);
+    });
+  })
+  .then((token) => {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(token),
+    };
+  })
+  .catch( error => {
+    return {
+      statusCode: 500,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify(error)
+    };
+  });
+};
+
+module.exports.getCalendarEvents = event => {
+  const oAuth2Client = new google.auth.oAuth2(
+    client_id,
+    client_secret,
+    redirect_uris[0]
+  );
+  const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+  oAuth2Client.setCredentials({ access_token });
+
+  return new Promise ((resolve, reject) => {
+   
+    calendar.events.list(
+      {
+        calendarId: calendar_id,
+        auth: oAuth2Client,
+        timeMin: new Date().toISOString(),
+        singleEvents: true,
+        orderBy: "startTime",
+      },
+      (error, response) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(response);
+        }
+      }
+    );
+  })
+      .then( results => {
+        return {
+          statusCode: 200,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify({ events: results.data.items })
+        };
+      })
+      .catch( error => {
+        return {
+          statusCode: 500,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+          body: JSON.stringify(error)
+        };
+      });
+  }

@@ -52,7 +52,7 @@ module.exports.getAuthURL = async () => {
     }),
   };
 };
-module.exports.getAccessToken = event => {
+module.exports.getAccessToken = async (event) => {
   const oAuth2Client = new google.auth.oAuth2(
     client_id,
     client_secret,
@@ -87,13 +87,13 @@ module.exports.getAccessToken = event => {
   });
 };
 
-module.exports.getCalendarEvents = event => {
+module.exports.getCalendarEvents = async (event) => {
   const oAuth2Client = new google.auth.oAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
-  const access_token = decodeURIComponent(`${event.pathParameters.access_token}`);
+  const access_token = encodeURIComponent(`${event.pathParameters.access_token}`);
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise ((resolve, reject) => {

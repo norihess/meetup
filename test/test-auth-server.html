@@ -2,14 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta http-equiv="X-UA-compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Test Auth Server</title>
-  </head>
-
-  <body>
-    <style>
+		
+		<style>
       #container {
         max-width: 500px;
       }
@@ -17,7 +15,9 @@
         margin-top: 25px;
       }
     </style>
+  </head>
 
+  <body>
     <main id="container">
       <h1>OAuth2 Test</h1>
       <h4><b>Step 1:</b> Get the OAuth URL</h4>
@@ -44,6 +44,7 @@
       <p id="events"></p>
 
     </main>
+
     <script type="text/javascript">
      
       const getURLElement = document.getElementById("getURL");
@@ -97,10 +98,10 @@
         
 				const eventRequest = getCalendarEvents + "/" + access_token;
         fetch(eventRequest)
-          .then(function (response) {
+          .then( response => {
             return response.json();
           })
-          .then(function (json) {
+          .then(json => {
             events.innerText = JSON.stringify(json, null, 2);
           });
       };

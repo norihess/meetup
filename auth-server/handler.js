@@ -1,4 +1,5 @@
 const { google } = require("googleapis");
+
 const OAuth2 = google.auth.OAuth2;
 const calendar = google.calendar("v3");
 /**
@@ -52,19 +53,22 @@ module.exports.getAuthURL = async () => {
     }),
   };
 };
+
 module.exports.getAccessToken = async (event) => {
   const oAuth2Client = new google.auth.oAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
+
   const code = decodeURIComponent(`${event.pathParameters.code}`);
-  return new Promise ((resolve, reject) => {
+
+  return new Promise((resolve, reject) => {
     oAuth2Client.getToken(code, (err, token) => {
       if (err){
-        return reject (err);
+        return reject(err);
       }
-      return resolve (token);
+      return resolve(token);
     });
   })
   .then((token) => {
@@ -72,11 +76,15 @@ module.exports.getAccessToken = async (event) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Headers": "*",
+        // "Access-Control-Allow-Methods": "*",
+        // "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify(token),
     };
   })
   .catch((err) => {
+    console.error(err);
     return {
       statusCode: 500,
       headers: {
@@ -85,7 +93,7 @@ module.exports.getAccessToken = async (event) => {
       body: JSON.stringify(err)
     };
   });
-};
+}
 
 module.exports.getCalendarEvents = async (event) => {
   const oAuth2Client = new google.auth.oAuth2(
@@ -93,11 +101,12 @@ module.exports.getCalendarEvents = async (event) => {
     client_secret,
     redirect_uris[0]
   );
+
   const access_token = encodeURIComponent(`${event.pathParameters.access_token}`);
+
   oAuth2Client.setCredentials({ access_token });
 
   return new Promise ((resolve, reject) => {
-   
     calendar.events.list(
       {
         calendarId: calendar_id,
@@ -105,17 +114,14 @@ module.exports.getCalendarEvents = async (event) => {
         timeMin: new Date().toISOString(),
         singleEvents: true,
         orderBy: "startTime",
-      },
-      (error, response) => {
+      }, (error, response) => {
         if (error) {
           reject(error);
-        } else {
-          resolve(response);
-        }
-      }
-    );
-  })
-      .then( results => {
+        } 
+        resolve(response);
+        });
+      })
+    .then( results => {
         return {
           statusCode: 200,
           headers: {
@@ -124,7 +130,8 @@ module.exports.getCalendarEvents = async (event) => {
           body: JSON.stringify({ events: results.data.items })
         };
       })
-      .catch((err) => {
+      .catch( err => {
+        console.error (err);
         return {
           statusCode: 500,
           headers: {

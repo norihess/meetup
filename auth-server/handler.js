@@ -55,16 +55,18 @@ module.exports.getAuthURL = async () => {
 };
 
 module.exports.getAccessToken = async (event) => {
-  const oAuth2Client = new google.auth.oAuth2(
+  const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]
   );
 
   const code = decodeURIComponent(`${event.pathParameters.code}`);
-
+    console.log(event.pathParameters.code)
   return new Promise((resolve, reject) => {
     oAuth2Client.getToken(code, (err, token) => {
+      console.log(err)
+      console.log(token)
       if (err){
         return reject(err);
       }
@@ -76,9 +78,9 @@ module.exports.getAccessToken = async (event) => {
       statusCode: 200,
       headers: {
         "Access-Control-Allow-Origin": "*",
-        // "Access-Control-Allow-Headers": "*",
-        // "Access-Control-Allow-Methods": "*",
-        // "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+        "Access-Control-Allow-Headers" : "Content-Type",
+        "Access-Control-Allow-Credentials": "true",
       },
       body: JSON.stringify(token),
     };
@@ -96,7 +98,7 @@ module.exports.getAccessToken = async (event) => {
 }
 
 module.exports.getCalendarEvents = async (event) => {
-  const oAuth2Client = new google.auth.oAuth2(
+  const oAuth2Client = new google.auth.OAuth2(
     client_id,
     client_secret,
     redirect_uris[0]

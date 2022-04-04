@@ -6,5 +6,3 @@ class Event extends Component {
   }
 }
 export default Event;
-import Event from './Event'; // in src/EventList.js
-import Event from '../Event'; // in src/__tests__/EventList.test.js

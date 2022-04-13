@@ -6,11 +6,11 @@ import CitySearch from '../CitySearch';
 
 describe('<App /> component', () => {
   let AppWrapper;
-	beforeAll(() => {
-		AppWrapper = shallow (<App />);
-	});
+  beforeAll(() => {
+    AppWrapper = shallow(<App />);
+  });
 
-	test('render list of events', () => {
+  test('render list of events', () => {
     expect(AppWrapper.find(EventList)).toHaveLength(1);
   });
 

@@ -15248,8 +15248,6 @@ const mockData = [
 		 }
 		]
 	 }
-	 
-
 ];
 
 export { mockData };

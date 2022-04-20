@@ -4,10 +4,11 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
+import { mockData } from './mock-data';
 
 class App extends Component {
   state = {
-    events: [],
+    events: mockData,
     locations: []
   }
   componentDidMount() {
@@ -38,8 +39,9 @@ class App extends Component {
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
         <NumberOfEvents />
+        <EventList events={this.state.events} />
+      
       </div>
     );
   }

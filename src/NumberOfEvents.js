@@ -48,9 +48,7 @@ class NumberOfEvents extends Component {
 						onClick={() => this.handleItemClicked(suggestion)}
 					>{suggestion}</li>
 				))}
-				<li>
-					<b>See all Events</b>
-				</li>
+			
 			</ul>
   </div>
     );

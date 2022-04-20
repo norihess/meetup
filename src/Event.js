@@ -18,7 +18,7 @@ class Event extends Component {
         {
           this.setState({
             show: "",
-            buttonText: "Hidden"
+            buttonText: "Hide"
           })
         }
         else {

@@ -3,13 +3,14 @@ import './App.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
-import { getEvents, extractLocations } from './api';
+import { getEvents } from './api';
 import { mockData } from './mock-data';
 
 class App extends Component {
   state = {
     events: mockData,
-    locations: []
+    locations: [],
+    events: []
   }
   componentDidMount() {
     this.mounted = true;
@@ -26,9 +27,7 @@ class App extends Component {
 
   updateEvents = (location) => {
     getEvents().then((events) => {
-      const locationEvents = (location === 'all') ?
-        events :
-        events.filter((event) => event.location === location);
+      const locationEvents = events.filter((event) => event.location === location);
       this.setState({
         events: locationEvents
       });

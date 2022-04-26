@@ -8,9 +8,9 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     return <div>
-     <i>{event.summary}</i> 
+     <b>{event.summary}</b> 
       < br/>
-      {event.location}
+      <i>{event.location}</i>
       < br/>
       <button type="button" onClick={()=>
       {

@@ -49,6 +49,17 @@ input[type="number"] {
   position: relative;
 }
 
+
+b {
+  margin-top: 20px;
+}
+.EventList > li {
+  border: 2px solid #d5d5d5d5;
+  margin: 10px;
+  padding: 10px;
+}
+
+
 .suggestions {
   width: 250px;
   position: absolute;

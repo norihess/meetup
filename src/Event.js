@@ -31,7 +31,7 @@ class Event extends Component {
       }>{this.state.buttonText}</button>
       <br />
       <p hidden={this.state.show}> {event.description} </p>
-    <br /><br />
+
     </div>;
   }
 }

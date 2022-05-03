@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
-    events: []
+    currentLocation: 'all',
+    numberOfEvents: 32
   }
   componentDidMount() {
     this.mounted = true;
@@ -32,22 +33,43 @@ class App extends Component {
   componentWillUnmount(){
     this.mounted = false;
   }
-  updateEvents = (location) => {
+  updateEvents = (location, numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events :
         events.filter((event) => event.location === location);
-      this.setState({
-        events: locationEvents
-      });
+        if(this.mounted){
+          this.setState({
+            events: locationEvents.slice(0, numberOfEvents),
+            currentLocation: location
+          });        
+        }
+     
     });
   }
+
+  updateNumberOfEvents = (event) => {
+    const value = event.target.value;
+    if (value < 1 || value > 32) {
+      this.setState({
+        numberOfEvents: "",
+        infoText: "Please enter a number between 1 and 32",
+      });
+    } else {
+      this.setState({
+        numberOfEvents: value,
+        infoText: "",
+      });
+    }
+    this.updateEvents(this.state.currentLocation, this.state.numberOfEvents)
+   //this.props.updateNumberOfEvents(event.target.value);
+  };
  
   render() {
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents />
+        <NumberOfEvents updateNumberOfEvents={this.updateNumberOfEvents} />
         <EventList events={this.state.events} />
       
       </div>

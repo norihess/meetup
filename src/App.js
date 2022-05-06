@@ -33,6 +33,7 @@ class App extends Component {
   componentWillUnmount(){
     this.mounted = false;
   }
+  
   updateEvents = (location, numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
@@ -48,15 +49,15 @@ class App extends Component {
     });
   }
 
-  updateNumberOfEvents = (event) => {
-    const value = event.target.value;
+  updateNumberOfEvents = async (event) => {
+    const value = event.target.value? parseInt(event.target.value) : 32;
     if (value < 1 || value > 32) {
-      this.setState({
+     await this.setState({
         numberOfEvents: "",
         infoText: "Please enter a number between 1 and 32",
       });
     } else {
-      this.setState({
+      await this.setState({
         numberOfEvents: value,
         infoText: "",
       });

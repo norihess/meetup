@@ -7,8 +7,6 @@ class NumberOfEvents extends Component {
 		suggestions: []
 	};
 
-	
-
 	handleItemClicked = (suggestion) => {
 		this.setState({
 			query: suggestion
@@ -17,7 +15,7 @@ class NumberOfEvents extends Component {
 
   render() {
     return (
-      <div className="NumberOfEvents">
+      <div className="numberOfEvents">
 				<br></br>
 				<p>Number of Events</p>
 				<input

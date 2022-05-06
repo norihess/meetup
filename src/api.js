@@ -75,17 +75,17 @@ const removeQuery = () => {
   }
 };
 const getToken = async (code) => {
-  try {
-      const encodeCode = encodeURIComponent(code);
+    try {
+        const encodeCode = encodeURIComponent(code);
 
-      const response = await fetch( 'https://1ti43nh9q6.execute-api.eu-central-1.amazonaws.com/dev/api/token' + '/' + encodeCode);
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      const { access_token } = await response.json();
-      access_token && localStorage.setItem("access_token", access_token);
-      return access_token;
-  } catch(error) {
-      error.json();
-  }
+        const response = await fetch( 'YOUR_GET_ACCESS_TOKEN_ENDPOINT' + '/' + encodeCode);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        const { access_token } = await response.json();
+        access_token && localStorage.setItem("access_token", access_token);
+        return access_token;
+    } catch(error) {
+        error.json();
+    }
 }

@@ -15,24 +15,15 @@ class NumberOfEvents extends Component {
 
   render() {
     return (
-      <div className="numberOfEvents">
+      <div className="NumberOfEvents">
 				<br></br>
 				<p>Number of Events</p>
 				<input
         type="number"
         className="numberOfEvents"
 				value={this.state.query}
-				onChange ={(evt) => this.props.updateNumberOfEvents(evt)}
+				onChange ={(event) => this.props.updateNumberOfEvents(event)}
       />
-			{/* <ul className="suggestions">
-				{this.state.suggestions.map((suggestion) => (
-					<li
-						key={suggestion}
-						onClick={() => this.handleItemClicked(suggestion)}
-					>{suggestion}</li>
-				))}
-			
-			</ul> */}
   </div>
     );
   }

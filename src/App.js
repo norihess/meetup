@@ -45,7 +45,6 @@ class App extends Component {
             currentLocation: location
           });        
         }
-     
     });
   }
 

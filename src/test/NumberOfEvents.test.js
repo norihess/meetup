@@ -12,9 +12,9 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsWrapper.find('.numberOfEvents')).toHaveLength(1);
   });
 
-	test('renders a list of suggestions', () => {
-		expect(NumberOfEventsWrapper.find('.suggestions')).toHaveLength(1);
-	});
+	// test('renders a list of suggestions', () => {
+	// 	expect(NumberOfEventsWrapper.find('.suggestions')).toHaveLength(1);
+	// });
 
 	test('renders number input correctly', () => {
 		const query = NumberOfEventsWrapper.state('numberOfEvents');

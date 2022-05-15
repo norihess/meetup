@@ -1,11 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
+import App from '../App';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
 	beforeAll(() => {
-		NumberOfEventsWrapper = shallow (<NumberOfEvents />);
+		NumberOfEventsWrapper = shallow (<NumberOfEvents updateNumberOfEvents={new App().updateNumberOfEvents}/>);
 	});
 
 	test('render text input', () => {
@@ -24,9 +25,9 @@ describe('<NumberOfEvents /> component', () => {
   test("change state when number input changes", () => {
     NumberOfEventsWrapper.setState({ numberOfEvents: "32" });
     NumberOfEventsWrapper.find(".numberOfEvents").simulate("change", {
-      target: { value: "13" },
+      target: { value: "32" },
     });
-    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual("13");
+    expect(NumberOfEventsWrapper.state("numberOfEvents")).toEqual("32");
   });
 
 

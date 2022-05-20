@@ -1,6 +1,6 @@
 Feature: Show and Hid Event Details
 
- Scenario: An event element is collapsed by default.
+ Scenario: An event element is collapsed by default
    Given the user is on the main page of the app
 	 When an event is displayed
 	 Then the event details will be collapsed

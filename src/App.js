@@ -50,18 +50,24 @@ class App extends Component {
 
   updateNumberOfEvents = async (event) => {
     const value = event.target.value? parseInt(event.target.value) : 32;
-    if (value < 1 || value > 32) {
-     await this.setState({
-        numberOfEvents: "",
-        infoText: "Please enter a number between 1 and 32",
-      });
-    } else {
-      await this.setState({
-        numberOfEvents: value,
-        infoText: "",
-      });
+    if (this.mounted())
+    {
+
+      if (value < 1 || value > 32) {
+        this.setState({
+          numberOfEvents: "",
+          infoText: "Please enter a number between 1 and 32",
+        });
+      } else {
+         this.setState({
+          numberOfEvents: value,
+          infoText: "",
+        });
+      }
+      this.updateEvents(this.state.currentLocation, this.state.numberOfEvents)
+
     }
-    this.updateEvents(this.state.currentLocation, this.state.numberOfEvents)
+    
    //this.props.updateNumberOfEvents(event.target.value);
   };
  

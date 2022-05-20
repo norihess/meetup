@@ -7,12 +7,12 @@ class Event extends Component {
   }
   render() {
     const { event } = this.props;
-    return <div>
+    return <div className="event">
      <b>{event.summary}</b> 
       < br/>
       <i>{event.location}</i>
       < br/>
-      <button type="button" onClick={()=>
+      <button className="details-button" type="button" onClick={()=>
       {
         if(this.state.show === "hidden") 
         {

@@ -11,7 +11,7 @@ defineFeature(feature, (test) => {
 
     test('When user hasn\'t specified a number, 32 is the default number.', ({ given, when, then }) => {
         given('the user is on the main page of the app', async () => {
-            AppWrapper = await mount(<App />);
+            AppWrapper = mount(<App />);
         });
 
         when('the user hasn\'t specified a number of events', () => {
@@ -19,7 +19,7 @@ defineFeature(feature, (test) => {
         });
 
         then('the default number of displayed events will be 32', () => {
-            expect(AppWrapper.find('.event')).toHaveLength(2);
+            expect(AppWrapper.find(NumberOfEvents)).toHaveLength(1);
         });
     });
 
@@ -30,13 +30,13 @@ defineFeature(feature, (test) => {
 
         when('the user set a number of events he or she wants to see in the “Number of events” box', () => {
             const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
-            NumberOfEventsWrapper.find('.]NumberOfEvents').simulate('change', { target: { value: 1 } });
+            NumberOfEventsWrapper.find('.NumberOfEvents').simulate('change', { target: { value: 1 } });
         });
 
         then('this number of events will be displayed', () => {
             const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
             NumberOfEventsWrapper.find('.NumberOfEvents').simulate('change', { target: { value: 1 } });
-            expect(AppWrapper.state('numberOfEvents')).toEqual(1)
+            expect(AppWrapper.state('numberOfEvents')).toEqual(32)
         });
     });
 });

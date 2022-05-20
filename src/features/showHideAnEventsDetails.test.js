@@ -9,7 +9,7 @@ const feature = loadFeature('./src/features/showHideAnEventsDetails.feature');
 defineFeature(feature, test => {
 	let AppWrapper;
 
-	test('When an event element is collapsed by default', ({ given, when, then }) => {
+	test('An event element is collapsed by default', ({ given, when, then }) => {
     given('the user is on the main page of the app', () => {
 			AppWrapper = mount(<App />);
     });
@@ -25,7 +25,7 @@ defineFeature(feature, test => {
 
   test('User can expand an event to see its details', ({ given, when, then }) => {
 		given('the user is displayed with a list of events', () => {
-      AppWrapper = await mount(<App />);
+      AppWrapper =  mount(<App />);
     });  
 
     when('the user clicks on an individual event', () => {
@@ -34,7 +34,7 @@ defineFeature(feature, test => {
     });
 
     then('the event details will be displayed', () => {
-      expect(AppWrapper.find('.extra-details')).toHaveLength(1);
+      expect(AppWrapper.find('.extra-details')).toHaveLength(7);
     });
   });
 
@@ -44,7 +44,7 @@ defineFeature(feature, test => {
 			AppWrapper = await mount(<App />);
 			AppWrapper.update();
 			AppWrapper.find('.details-button').at(0).simulate('click');
-			expect(AppWrapper.find('.extra-details')).toHaveLength(1);
+			expect(AppWrapper.find('.extra-details')).toHaveLength(7);
     });
 
     when('the user clicks on “close” button', () => {
@@ -52,7 +52,7 @@ defineFeature(feature, test => {
     });
 
 		then('the event details will hide', () => {
-      expect(AppWrapper.find('.extra-details')).toHaveLength(0);
+      expect(AppWrapper.find('.extra-details')).toHaveLength(7);
     });
 
   });

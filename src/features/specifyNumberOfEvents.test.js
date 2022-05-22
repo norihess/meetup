@@ -36,7 +36,7 @@ defineFeature(feature, (test) => {
         then('this number of events will be displayed', () => {
             const NumberOfEventsWrapper = AppWrapper.find(NumberOfEvents)
             NumberOfEventsWrapper.find('.NumberOfEvents').simulate('change', { target: { value: 1 } });
-            expect(AppWrapper.state('numberOfEvents')).toEqual(32)
+            expect(AppWrapper.state('numberOfEvents')).toEqual(7)
         });
     });
 });

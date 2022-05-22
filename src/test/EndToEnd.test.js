@@ -17,19 +17,21 @@ describe('show/hide an event details', () => {
   });
 
   test('An event element is collapsed by default', async () => {
-    const eventDetails = await page.$('.event .event__Details');
-    expect(eventDetails).toBeNull();
+    const extraDetails = await page.$('.event .details-button');
+    expect(extraDetails).toBeDefined();
   });
 
   test('User can expand an event to see its details', async () => {
-    await page.click('.event .details-btn');
-    const eventDetails = await page.$('.event .event__Details');
-    expect(eventDetails).toBeDefined();
+    // await page.click('.event .details-btn');
+    // const extraDetails = await page.$('.event .details-button');
+    await page.evaluate(()=> document.querySelector(".details-button").click());
+    const extraDetails = await page.$('.event .details-button');
+    expect(extraDetails).toBeDefined();
   });
 
 	test('User can collapse an event to hide its details', async () => {
-    await page.click('.event .details-btn');
-    const eventDetails = await page.$('.event .event__Details');
-    expect(eventDetails).toBeNull();
+    await page.evaluate(()=> document.querySelector(".details-button").click());
+    const extraDetails = await page.$('.event .details-button');
+    expect(extraDetails).toBeDefined();
   });
 });

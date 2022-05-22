@@ -12,7 +12,7 @@ class App extends Component {
     events: [],
     locations: [],
     currentLocation: 'all',
-    numberOfEvents: 32
+    numberOfEvents: 7
   }
   componentDidMount() {
     this.mounted = true;

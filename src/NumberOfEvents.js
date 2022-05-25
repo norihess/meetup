@@ -5,14 +5,14 @@ import {ErrorAlert} from './alert';
 class NumberOfEvents extends Component {
 	state = {
 		infoText: "",
-		suggestions: []
+		// suggestions: []
 	};
 	
-	handleItemClicked = (suggestion) => {
-		this.setState({
-			query: suggestion
-		});
-	}
+	// handleItemClicked = (suggestion) => {
+	// 	this.setState({
+	// 		query: suggestion
+	// 	});
+	// }
 
   render() {
     return (
@@ -23,7 +23,7 @@ class NumberOfEvents extends Component {
 				<input
         type="number"
         className="numberOfEvents"
-				value={this.state.query}
+				value={this.props.numberOfEvents}
 				onChange ={(event) => this.props.updateNumberOfEvents(event)}
       />
   </div>

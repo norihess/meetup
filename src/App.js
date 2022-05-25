@@ -34,7 +34,7 @@ class App extends Component {
     this.mounted = false;
   }
   
-  updateEvents = (location, numberOfEvents) => {
+  updateEvents = async (location, numberOfEvents) => {
     getEvents().then((events) => {
       const locationEvents = (location === 'all') ?
         events :
@@ -49,23 +49,19 @@ class App extends Component {
   }
 
   updateNumberOfEvents = async (event) => {
-    const value = event.target.value? parseInt(event.target.value) : 32;
-    if (this.mounted())
-    {
-
-      if (value < 0 || value > 32) {
-        this.setState({
+    const val =  event.target.value? parseInt(event.target.value) : 32;
+      if (val < 0 || val > 32) {
+       await this.setState({
           errorText: 'Select a number from 1 to 32'
         })
       } else {
-        this.props.updateNumberOfEvents(value);
-        this.setState({
-          errorText: ''
+        await this.setState({
+          errorText: '',
+          numberOfEvents: val
         })
+        this.updateEvents(this.state.currentLocation, this.state.numberOfEvents)
       }
-    }
-      this.updateEvents(this.state.currentLocation, this.state.numberOfEvents)
-
+     
     }
     
    //this.props.updateNumberOfEvents(event.target.value);
@@ -76,7 +72,7 @@ class App extends Component {
       <div className="App">
         <h1>Welcome to the Meet App</h1>
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents} />
-        <NumberOfEvents updateNumberOfEvents={this.updateNumberOfEvents} />
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateNumberOfEvents={this.updateNumberOfEvents} />
         <EventList events={this.state.events} />
       
       </div>

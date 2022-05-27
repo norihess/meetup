@@ -21,7 +21,7 @@ const checkToken = async (accessToken) => {
 export const getEvents = async () => {
   NProgress.start();
 
-  if (window.location.href.startsWith("http://localhost")) {
+  if ( (window.location.href.startsWith("http://localhost") ) ||  (!navigator.onLine) ) {
     NProgress.done();
     return mockData;
   }

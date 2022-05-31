@@ -34,7 +34,7 @@ defineFeature(feature, test => {
     });
 
     then('the event details will be displayed', () => {
-      expect(AppWrapper.find('.extra-details')).toHaveLength(7);
+      expect(AppWrapper.find('.extra-details')).toHaveLength(16);
     });
   });
 
@@ -44,7 +44,7 @@ defineFeature(feature, test => {
 			AppWrapper = await mount(<App />);
 			AppWrapper.update();
 			AppWrapper.find('.details-button').at(0).simulate('click');
-			expect(AppWrapper.find('.extra-details')).toHaveLength(7);
+			expect(AppWrapper.find('.extra-details')).toHaveLength(16);
     });
 
     when('the user clicks on “close” button', () => {
@@ -52,7 +52,7 @@ defineFeature(feature, test => {
     });
 
 		then('the event details will hide', () => {
-      expect(AppWrapper.find('.extra-details')).toHaveLength(7);
+      expect(AppWrapper.find('.extra-details')).toHaveLength(16);
     });
 
   });

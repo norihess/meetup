@@ -21,7 +21,7 @@ const credentials = {
   token_uri: "https://oauth2.googleapis.com/token",
   auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
   redirect_uris: ["https://norihess.github.io/meetup"],
-  javascript_origins: ["https://norihess.github.io", "http://localhost:3000", "http://127.0.0.1:5500", "http://localhost:5500"],
+  javascript_origins: ["https://norihess.github.io", "http://localhost:3000", "http://127.0.0.1:5500", "http://localhost:5500", "https://nori-meet-app-011.netlify.app"],
 };
 const { client_secret, client_id, redirect_uris, calendar_id } = credentials;
 const oAuth2Client = new google.auth.OAuth2(

@@ -5,7 +5,7 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents, extractLocations } from './api';
-import { mockData } from './mock-data';
+// import { mockData } from './mock-data';
 import EventGenre from './EventGenre';
 import {
   ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
@@ -26,14 +26,14 @@ class App extends Component {
       }
     });
   }
-  componentDidMount() {
-    this.mounted = true;
-    getEvents().then((events) => {
-      if (this.mounted) {
-        this.setState({ events, locations: extractLocations(events) });
-      }
-    });
-  }
+  // componentDidMount() {
+  //   this.mounted = true;
+  //   getEvents().then((events) => {
+  //     if (this.mounted) {
+  //       this.setState({ events, locations: extractLocations(events) });
+  //     }
+  //   });
+  // }
   componentWillUnmount(){
     this.mounted = false;
   }
